@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 IoT section</title>
+    <style>
+        body {
+            font-family: Segoe UI, Arial, sans-serif;
+            background: url('https://wallpapercave.com/wp/wp7584703.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(200, 200, 200, 0.2));
+            padding: 15px;
+            color: white;
+            font-size: 22px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            font-weight: bold;
+            backdrop-filter: blur(15px);
+            box-shadow: inset 0px 1px 4px rgba(255, 255, 255, 0.5);
+            border-radius: 10px 10px 0 0;
+        }
+        .container {
+            display: flex;
+            margin: 20px;
+            backdrop-filter: blur(30px) saturate(180%);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+        .sidebar {
+            width: 250px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-right: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 10px 0 0 10px;
+            backdrop-filter: blur(20px);
+            box-shadow: inset -2px 0px 5px rgba(255, 255, 255, 0.4);
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5);
+            border-radius: 0 10px 10px 0;
+            backdrop-filter: blur(25px);
+            border-left: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .content h1 {
+            font-size: 28px;
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            padding-bottom: 10px;
+            text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6);
+        }
+        .actions a {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: inset 0px 0px 5px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .actions a:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .system-specs {
+            display: none;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5);
+            margin-top: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(30px);
+        }
+        .system-specs button {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: inset 0px 0px 5px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s;
+        }
+        .system-specs button:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+    <script>
+        function showSystemSpecs() {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('system-specs').style.display = 'block';
+        }
+        function goBack() {
+            document.getElementById('main-content').style.display = 'flex';
+            document.getElementById('system-specs').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="header">Control Panel</div>
+    <div class="container" id="main-content">
+        <div class="sidebar">
+            <a href="#">System and Security</a>
+            <a href="#">Network and Internet</a>
+            <a href="#">Hardware and Sound</a>
+            <a href="#">Programs</a>
+            <a href="#">User Accounts</a>
+            <a href="#">Appearance and Personalization</a>
+            <a href="https://www.teknixstuff.com">Go back To teknixstuff.com</a>
+        </div>
+        <div class="content">
+            <h1>10 IoT's Section is Under Construction</h1>
+            <p>My main goal is to make this site look as aero as possible, lol.</p>
+            <p>You can support me on my YouTube channel!</p>
+            <div class="actions">
+                <a onclick="showSystemSpecs()">My System</a>
+            </div>
+        </div>
+    </div>
+    <div id="system-specs" class="system-specs">
+        <h2>My System Specs</h2>
+        <p>Processor: AMD Ryzen 7 7435HS</p>
+        <p>RAM: 16GB DDR5</p>
+        <p>Graphics: NVIDIA RTX 3050 Laptop GPU</p>
+        <p>OS: Windows 10</p>
+        <button onclick="goBack()">Go Back</button>
+    </div>
+</body>
+</html>
