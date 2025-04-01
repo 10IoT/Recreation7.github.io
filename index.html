@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10 IoT </title>
+    <title>Windows 7 Control Panel</title>
     <style>
         body {
             font-family: Segoe UI, Arial, sans-serif;
@@ -13,143 +13,163 @@
             padding: 0;
         }
         .header {
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(200, 200, 200, 0.2));
+            background: rgba(255, 255, 255, 0.3);
             padding: 15px;
-            color: white;
+            color: black;
             font-size: 22px;
             text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
             font-weight: bold;
+            box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(15px);
-            box-shadow: inset 0px 1px 4px rgba(255, 255, 255, 0.5);
-            border-radius: 10px 10px 0 0;
         }
         .container {
             display: flex;
             margin: 20px;
-            backdrop-filter: blur(30px) saturate(180%);
+            background: rgba(255, 255, 255, 0.25);
             border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            backdrop-filter: blur(20px);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
         .sidebar {
             width: 250px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.4);
             padding: 15px;
-            border-right: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 10px 0 0 10px;
-            backdrop-filter: blur(20px);
-            box-shadow: inset -2px 0px 5px rgba(255, 255, 255, 0.4);
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
         }
         .sidebar a {
             display: block;
-            color: white;
+            color: black;
             text-decoration: none;
             padding: 10px;
             font-size: 16px;
             border-radius: 5px;
-            transition: background 0.3s, box-shadow 0.3s;
+            margin-bottom: 5px;
+            transition: background 0.3s;
         }
         .sidebar a:hover {
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5);
+            background: rgba(0, 0, 0, 0.1);
         }
         .content {
             flex-grow: 1;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5);
-            border-radius: 0 10px 10px 0;
-            backdrop-filter: blur(25px);
-            border-left: 1px solid rgba(255, 255, 255, 0.4);
         }
         .content h1 {
-            font-size: 28px;
-            color: white;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            font-size: 24px;
+            color: black;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             padding-bottom: 10px;
-            text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6);
         }
-        .actions a {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 10px;
-            box-shadow: inset 0px 0px 5px rgba(255, 255, 255, 0.5);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        .actions a:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
-        .system-specs {
+        .info-box {
             display: none;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5);
-            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.4);
             border-radius: 10px;
-            backdrop-filter: blur(30px);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            margin-top: 15px;
+            backdrop-filter: blur(15px);
+            animation: fadeIn 0.3s ease-in-out;
         }
-        .system-specs button {
-            background: rgba(255, 255, 255, 0.3);
+        .info-box button {
+            margin-top: 10px;
+            padding: 10px;
+            background: #0078D7;
             color: white;
             border: none;
-            padding: 10px;
             cursor: pointer;
             border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: inset 0px 0px 5px rgba(255, 255, 255, 0.5);
-            transition: all 0.3s;
         }
-        .system-specs button:hover {
-            background: rgba(255, 255, 255, 0.5);
+        .info-box button:hover {
+            background: #005A9E;
         }
     </style>
     <script>
-        function showSystemSpecs() {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('system-specs').style.display = 'block';
+        function showInfo(id) {
+            document.querySelectorAll('.info-box').forEach(box => box.style.display = 'none');
+            if (id) {
+                let element = document.getElementById(id);
+                if (element) {
+                    element.style.display = 'block';
+                }
+            }
         }
-        function goBack() {
-            document.getElementById('main-content').style.display = 'flex';
-            document.getElementById('system-specs').style.display = 'none';
-        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.sidebar a').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const targetId = this.getAttribute('onclick').match(/'(.*?)'/)[1];
+                    showInfo(targetId);
+                });
+            });
+        });
     </script>
 </head>
 <body>
     <div class="header">Control Panel</div>
-    <div class="container" id="main-content">
+    <div class="container">
         <div class="sidebar">
-            <a href="#">System and Security</a>
-            <a href="#">Network and Internet</a>
-            <a href="#">Hardware and Sound</a>
-            <a href="#">Programs</a>
-            <a href="#">User Accounts</a>
-            <a href="#">Appearance and Personalization</a>
+            <a href="#" onclick="showInfo('system-security')">System and Security</a>
+            <a href="#" onclick="showInfo('network')">Network and Internet</a>
+            <a href="#" onclick="showInfo('hardware')">Hardware and Sound</a>
+            <a href="#" onclick="showInfo('programs')">Programs</a>
+            <a href="#" onclick="showInfo('accounts')">User Accounts</a>
+            <a href="#" onclick="showInfo('appearance')">Appearance and Personalization</a>
+            <a href="#" onclick="showInfo('system-specs')">System Specs</a>
             <a href="https://www.teknixstuff.com">Go back To teknixstuff.com</a>
         </div>
         <div class="content">
-            <h1>10 IoT site is Under Construction</h1>
-            <p>My main goal is to make this site look as aero as possible, lol.</p>
-            <p>You can support me on my YouTube channel!</p>
-            <div class="actions">
-                <a onclick="showSystemSpecs()">My System</a>
+            <h1>10 IoT site is under construction !</h1>
+            <p>Select a category to view settings.</p>
+            <p>My goal is to make this site as real as possible, lol.</p>
+            <p>Wish to support ? Consider that done by subscribing to my channel !</p>
+            <div id="system-security" class="info-box">
+                <h2>System and Security</h2>
+                <p>View system info, security updates, and backups.</p>
+                <button onclick="showInfo('')">Close</button>
+            </div>
+            <div id="network" class="info-box">
+                <h2>Network and Internet</h2>
+                <p>Manage network connections and internet settings.</p>
+                <button onclick="showInfo('')">Close</button>
+            </div>
+            <div id="hardware" class="info-box">
+                <h2>Hardware and Sound</h2>
+                <p>Configure printers, audio settings, and devices.</p>
+                <button onclick="showInfo('')">Close</button>
+            </div>
+            <div id="programs" class="info-box">
+                <h2>Programs</h2>
+                <p>Uninstall, change, or manage installed software.</p>
+                <button onclick="showInfo('')">Close</button>
+            </div>
+            <div id="accounts" class="info-box">
+                <h2>User Accounts</h2>
+                <p>Manage user account settings and passwords.</p>
+                <button onclick="showInfo('')">Close</button>
+            </div>
+            <div id="appearance" class="info-box">
+                <h2>Appearance and Personalization</h2>
+                <p>Change themes, desktop background, and display settings.</p>
+                <button onclick="showInfo('')">Close</button>
+            </div>
+            <div id="system-specs" class="info-box">
+                <h2>System</h2>
+                <p>Processor: AMD Ryzen 7 7345HS</p>
+                <p>RAM: 16GB DDR5</p>
+                <p>OS: Windows 10 LTSC 2021 IoT</p>
+                <p>GPU: Nvidia Geforce RTX 3050 Laptop GPU</p>
+                <p>Storage: 2TB NVME Gen 4</p>
+                <button onclick="showInfo('')">Close</button>
             </div>
         </div>
-    </div>
-    <div id="system-specs" class="system-specs">
-        <h2>My System Specs</h2>
-        <p>Processor: AMD Ryzen 7 7435HS</p>
-        <p>RAM: 16GB DDR5</p>
-        <p>Graphics: NVIDIA RTX 3050 Laptop GPU</p>
-        <p>OS: Windows 10</p>
-        <button onclick="goBack()">Go Back</button>
     </div>
 </body>
 </html>
