@@ -1,175 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows 7 Control Panel</title>
-    <style>
-        body {
-            font-family: Segoe UI, Arial, sans-serif;
-            background: url('https://wallpapercave.com/wp/wp7584703.jpg') no-repeat center center fixed;
-            background-size: cover;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            background: rgba(255, 255, 255, 0.3);
-            padding: 15px;
-            color: black;
-            font-size: 22px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-            font-weight: bold;
-            box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(15px);
-        }
-        .container {
-            display: flex;
-            margin: 20px;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
-            padding: 15px;
-            backdrop-filter: blur(20px);
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .sidebar {
-            width: 250px;
-            background: rgba(255, 255, 255, 0.4);
-            padding: 15px;
-            border-right: 1px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(15px);
-        }
-        .sidebar a {
-            display: block;
-            color: black;
-            text-decoration: none;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            margin-bottom: 5px;
-            transition: background 0.3s;
-        }
-        .sidebar a:hover {
-            background: rgba(0, 0, 0, 0.1);
-        }
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-        }
-        .content h1 {
-            font-size: 24px;
-            color: black;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 10px;
-        }
-        .info-box {
-            display: none;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            margin-top: 15px;
-            backdrop-filter: blur(15px);
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        .info-box button {
-            margin-top: 10px;
-            padding: 10px;
-            background: #0078D7;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .info-box button:hover {
-            background: #005A9E;
-        }
-    </style>
-    <script>
-        function showInfo(id) {
-            document.querySelectorAll('.info-box').forEach(box => box.style.display = 'none');
-            if (id) {
-                let element = document.getElementById(id);
-                if (element) {
-                    element.style.display = 'block';
-                }
-            }
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Windows 7 Control Panel</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://wallpapercave.com/wp/wp7584703.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+    }
+    .window {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      width: 900px;
+      height: 600px;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid #a0a0a0;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      border-radius: 6px;
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      resize: both;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .title-bar {
+      background: linear-gradient(to bottom, #dfefff, #bcd5f9);
+      padding: 8px 12px;
+      color: #000;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: move;
+      user-select: none;
+      border-bottom: 1px solid #a0a0a0;
+    }
+    .window-content {
+      flex: 1;
+      display: flex;
+    }
+    .sidebar {
+      width: 250px;
+      background: rgba(255, 255, 255, 0.4);
+      padding: 15px;
+      border-right: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(15px);
+      overflow-y: auto;
+    }
+    .sidebar a {
+      display: block;
+      color: black;
+      text-decoration: none;
+      padding: 10px;
+      font-size: 15px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .content h1 {
+      font-size: 22px;
+      color: black;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      padding-bottom: 10px;
+    }
+    .info-box {
+      display: none;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      margin-top: 15px;
+      backdrop-filter: blur(15px);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .info-box button {
+      margin-top: 10px;
+      padding: 10px;
+      background: #0078D7;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .info-box button:hover {
+      background: #005A9E;
+    }
+  </style>
+  <script>
+    function showInfo(id) {
+      document.querySelectorAll('.info-box').forEach(box => box.style.display = 'none');
+      if (id) {
+        const element = document.getElementById(id);
+        if (element) element.style.display = 'block';
+      }
+    }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll('.sidebar a').forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const targetId = this.getAttribute('onclick').match(/'(.*?)'/)[1];
-                    showInfo(targetId);
-                });
-            });
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll('.sidebar a').forEach(link => {
+        link.addEventListener('click', function (event) {
+          if (this.getAttribute('target') !== '_blank') {
+            event.preventDefault();
+            const targetId = this.getAttribute('onclick')?.match(/'(.*?)'/);
+            if (targetId) showInfo(targetId[1]);
+          }
         });
-    </script>
+      });
+
+      const bar = document.querySelector('.title-bar');
+      const win = document.querySelector('.window');
+      let isDragging = false, offsetX = 0, offsetY = 0;
+      bar.addEventListener('mousedown', function (e) {
+        isDragging = true;
+        offsetX = e.clientX - win.offsetLeft;
+        offsetY = e.clientY - win.offsetTop;
+      });
+      document.addEventListener('mousemove', function (e) {
+        if (isDragging) {
+          win.style.left = (e.clientX - offsetX) + 'px';
+          win.style.top = (e.clientY - offsetY) + 'px';
+        }
+      });
+      document.addEventListener('mouseup', function () { isDragging = false; });
+    });
+  </script>
 </head>
 <body>
-    <div class="header">Control Panel</div>
-    <div class="container">
-        <div class="sidebar">
-            <a href="#" onclick="showInfo('system-security')">System and Security</a>
-            <a href="#" onclick="showInfo('network')">Network and Internet</a>
-            <a href="#" onclick="showInfo('hardware')">Hardware and Sound</a>
-            <a href="#" onclick="showInfo('programs')">Programs</a>
-            <a href="#" onclick="showInfo('accounts')">User Accounts</a>
-            <a href="#" onclick="showInfo('appearance')">Appearance and Personalization</a>
-            <a href="#" onclick="showInfo('system-specs')">System Specs</a>
-            <a href="https://teknixstuff.com">Go Back to Teknixstuff.com</a>
+  <div class="window">
+    <div class="title-bar">Control Panel</div>
+    <div class="window-content">
+      <div class="sidebar">
+        <a href="#" onclick="showInfo('system-security')">System and Security</a>
+        <a href="#" onclick="showInfo('network')">Network and Internet</a>
+        <a href="#" onclick="showInfo('hardware')">Hardware and Sound</a>
+        <a href="#" onclick="showInfo('programs')">Programs</a>
+        <a href="#" onclick="showInfo('accounts')">User Accounts</a>
+        <a href="#" onclick="showInfo('appearance')">Appearance and Personalization</a>
+        <a href="#" onclick="showInfo('system-specs')">System Specs</a>
+        <a href="https://www.teknixstuff.com" target="_blank">Go back to teknixstuff.com</a>
+      </div>
+      <div class="content">
+        <h1>10 IoT site is under construction!</h1>
+        <p>Select a category to view settings.</p>
+        <p>My goal is to make this site as real as possible, lol.</p>
+        <p>Wish to support? Consider that done by subscribing to my channel!</p>
+
+        <div id="system-security" class="info-box">
+          <h2>System and Security</h2>
+          <p>View system info, security updates, and backups.</p>
+          <button onclick="showInfo('')">Close</button>
         </div>
-        <div class="content">
-            <h1>10 IoT site is under construction !</h1>
-            <p>Select a category to view settings.</p>
-            <p>My goal is to make this site as real as possible, lol.</p>
-            <p>Wish to support ? Consider that done by subscribing to my channel !</p>
-            <div id="system-security" class="info-box">
-                <h2>System and Security</h2>
-                <p>View system info, security updates, and backups.</p>
-                <button onclick="showInfo('')">Close</button>
-            </div>
-            <div id="network" class="info-box">
-                <h2>Network and Internet</h2>
-                <p>Manage network connections and internet settings.</p>
-                <button onclick="showInfo('')">Close</button>
-            </div>
-            <div id="hardware" class="info-box">
-                <h2>Hardware and Sound</h2>
-                <p>Configure printers, audio settings, and devices.</p>
-                <button onclick="showInfo('')">Close</button>
-            </div>
-            <div id="programs" class="info-box">
-                <h2>Programs</h2>
-                <p>Uninstall, change, or manage installed software.</p>
-                <button onclick="showInfo('')">Close</button>
-            </div>
-            <div id="accounts" class="info-box">
-                <h2>User Accounts</h2>
-                <p>Manage user account settings and passwords.</p>
-                <button onclick="showInfo('')">Close</button>
-            </div>
-            <div id="appearance" class="info-box">
-                <h2>Appearance and Personalization</h2>
-                <p>Change themes, desktop background, and display settings.</p>
-                <button onclick="showInfo('')">Close</button>
-            </div>
-            <div id="system-specs" class="info-box">
-                <h2>System</h2>
-                <p>Processor: AMD Ryzen 7 7345HS</p>
-                <p>RAM: 16GB DDR5</p>
-                <p>OS: Windows 10 LTSC 2021 IoT</p>
-                <p>GPU: Nvidia Geforce RTX 3050 Laptop GPU</p>
-                <p>Storage: 2TB NVME Gen 4</p>
-                <button onclick="showInfo('')">Close</button>
-            </div>
+        <div id="network" class="info-box">
+          <h2>Network and Internet</h2>
+          <p>Manage network connections and internet settings.</p>
+          <button onclick="showInfo('')">Close</button>
         </div>
+        <div id="hardware" class="info-box">
+          <h2>Hardware and Sound</h2>
+          <p>Configure printers, audio settings, and devices.</p>
+          <button onclick="showInfo('')">Close</button>
+        </div>
+        <div id="programs" class="info-box">
+          <h2>Programs</h2>
+          <p>Uninstall, change, or manage installed software.</p>
+          <button onclick="showInfo('')">Close</button>
+        </div>
+        <div id="accounts" class="info-box">
+          <h2>User Accounts</h2>
+          <p>Manage user account settings and passwords.</p>
+          <button onclick="showInfo('')">Close</button>
+        </div>
+        <div id="appearance" class="info-box">
+          <h2>Appearance and Personalization</h2>
+          <p>Change themes, desktop background, and display settings.</p>
+          <button onclick="showInfo('')">Close</button>
+        </div>
+        <div id="system-specs" class="info-box">
+          <h2>System</h2>
+          <p>Processor: AMD Ryzen 7 7345HS</p>
+          <p>RAM: 16GB DDR5</p>
+          <p>OS: Windows 10 LTSC 2021 IoT</p>
+          <p>GPU: Nvidia Geforce RTX 3050 Laptop GPU</p>
+          <p>Storage: 2TB NVME Gen 4</p>
+          <button onclick="showInfo('')">Close</button>
+        </div>
+      </div>
     </div>
+  </div>
 </body>
 </html>
