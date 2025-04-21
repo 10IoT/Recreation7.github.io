@@ -12,12 +12,6 @@
       font-family: "Segoe UI", Tahoma, sans-serif;
     }
 
-    .window {
-      width: 90vw;
-      max-width: 1000px;
-      margin: 20px auto;
-    }
-
     .window-content {
       display: flex;
     }
@@ -105,27 +99,6 @@
       padding: 0 10px;
     }
 
-    .btn {
-      background: linear-gradient(to bottom, #ffffff, #e5e5e5);
-      border: 1px solid #a9a9a9;
-      border-radius: 4px;
-      padding: 4px 12px;
-      font-size: 13px;
-      box-shadow: inset 0 1px 0 #fff;
-      transition: background 0.2s ease;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      background: linear-gradient(to bottom, #dbefff, #c4e1ff);
-      border-color: #7aaedb;
-    }
-
-    .btn:active {
-      background: linear-gradient(to bottom, #aaccee, #88bbdd);
-      border-color: #337ab7;
-    }
-
     input.input {
       padding: 4px 6px;
       border: 1px solid #999;
@@ -165,28 +138,27 @@
     }
 
     .construction-message {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #f8f8f8;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-}
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f8f8f8;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
 
-.construction-message strong {
-  color: #0078d7;
-}
+    .construction-message strong {
+      color: #0078d7;
+    }
 
-.construction-message em {
-  color: #888;
-}
-
+    .construction-message em {
+      color: #888;
+    }
   </style>
 </head>
 <body>
-  <div class="window active">
+  <div class="window glass active" style="--window-background-color: #805ba5; max-width: 100%; margin: 0 auto;">
     <div class="title-bar">
       <div class="title-bar-text">This PC</div>
       <div class="title-bar-controls">
@@ -197,59 +169,60 @@
     </div>
     <div class="window-body">
       <div class="address-bar">
-        <button class="btn">Organize</button>
-        <button class="btn">System Properties</button>
-        <button class="btn">Uninstall a Program</button>
-        <button class="btn">Map Network Drive</button>
-        <button class="btn">Control Panel</button>
+        <button class="button">Organize</button>
+        <button class="button">System Properties</button>
+        <button class="button">Uninstall a Program</button>
+        <button class="button">Map Network Drive</button>
+        <button class="button">Control Panel</button>
       </div>
       <div class="address-bar">
         <img src="icons/back.png" width="20" alt="Back">
         <input class="input" type="text" value="Computer" style="flex: 1;">
-        <img src="icons\Filetypes, Devices, Miscellaneous\imageres_94.ico" width="20" alt="Search">
+        <img src="icons/Filetypes, Devices, Miscellaneous/imageres_94.ico" width="20" alt="Search">
       </div>
 
       <div class="window-content">
         <div class="sidebar">
           <h4>Favorites</h4>
           <ul>
-            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_110.ico">Desktop</li>
-            <li><img src="icons\Filetypes, Devices, Miscellaneous\downloads.png">Downloads</li>
+            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_110.ico">Desktop</li>
+            <li><img src="icons/Filetypes, Devices, Miscellaneous/downloads.png">Downloads</li>
           </ul>
           <h4>Libraries</h4>
           <ul>
-            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_90.ico">Documents</li>
-            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_1026.ico">Music</li>
-            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_57.ico">Pictures</li>
-            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_23.ico">Videos</li>
+            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_90.ico">Documents</li>
+            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_1026.ico">Music</li>
+            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_57.ico">Pictures</li>
+            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_23.ico">Videos</li>
           </ul>
           <h4>Disks</h4>
           <ul>
-            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_36.ico">Local Disk (C:)</li>
-            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_32.ico">Other Stuff (D:)</li>
-            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_32.ico">Local Disk 7 (T:)</li>
+            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_36.ico">Local Disk (C:)</li>
+            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Other Stuff (D:)</li>
+            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Local Disk 7 (T:)</li>
           </ul>
           <h4>Network</h4>
         </div>
         <div class="main">
           <div class="drive-list">
             <div class="drive">
-              <img src="icons\Filetypes, Devices, Miscellaneous\imageres_36.ico" alt="Drive C">
+              <img src="icons/Filetypes, Devices, Miscellaneous/imageres_36.ico" alt="Drive C">
               <div>Local Disk (C:)</div>
             </div>
             <div class="drive">
-              <img src="icons\Filetypes, Devices, Miscellaneous\imageres_32.ico" alt="Drive D">
+              <img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico" alt="Drive D">
               <div>Other Stuff (D:)</div>
             </div>
             <div class="drive">
-              <img src="icons\Filetypes, Devices, Miscellaneous\imageres_32.ico" alt="Drive T">
+              <img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico" alt="Drive T">
               <div>Local Disk 7 (T:)</div>
             </div>
             <div class="construction-message">
               <p><strong>10 IoT site is under construction</strong></p>
               <p><em>News: UI improved!</em></p>
+              <p><em>Have any suggestions/additions to the site ?</em></p>
+              <p><em>DM me on discord, filedropconfusion</em></p>
             </div>
-          </div>
           </div>
         </div>
       </div>
@@ -295,7 +268,7 @@
         isMaximized = true;
       } else {
         windowEl.removeAttribute('style');
-        windowEl.classList.add('window');
+        windowEl.classList.add('window', 'glass', 'active');
         isMaximized = false;
       }
     });
@@ -328,5 +301,34 @@
       document.getElementById('contextMenu').style.display = 'none';
     });
   </script>
+  <script>
+    let isDragging = false;
+    let offsetX, offsetY;
+  
+    titleBar.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      const rect = windowEl.getBoundingClientRect();
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+  
+      // Ensure window is absolutely positioned for dragging
+      windowEl.style.position = 'absolute';
+      windowEl.style.margin = '0';
+      windowEl.style.left = `${rect.left}px`;
+      windowEl.style.top = `${rect.top}px`;
+      windowEl.style.zIndex = '9999';
+    });
+  
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        windowEl.style.left = `${e.clientX - offsetX}px`;
+        windowEl.style.top = `${e.clientY - offsetY}px`;
+      }
+    });
+  
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+  </script>  
 </body>
 </html>
