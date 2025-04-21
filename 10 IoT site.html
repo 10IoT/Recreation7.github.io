@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>This PC</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/7.css@0.5.0/dist/7.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: url('https://wallpapercave.com/wp/Wn3Dygb.jpg') center/cover no-repeat fixed;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    .window {
+      width: 90vw;
+      max-width: 1000px;
+      margin: 20px auto;
+    }
+
+    .window-content {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 220px;
+      padding: 12px;
+      background: #f2f2f2;
+      border-right: 1px solid #ccc;
+      overflow-y: auto;
+    }
+
+    .sidebar h4 {
+      margin: 10px 0 4px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .sidebar li {
+      display: flex;
+      align-items: center;
+      padding: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      border-radius: 4px;
+    }
+
+    .sidebar li img {
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+    }
+
+    .sidebar li:hover {
+      background-color: #d6e8ff;
+    }
+
+    .main {
+      flex: 1;
+      padding: 16px;
+      background: white;
+    }
+
+    .drive-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .drive {
+      width: 140px;
+      padding: 12px 6px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+    }
+
+    .drive:hover {
+      background: #d6e8ff;
+    }
+
+    .drive:active {
+      background: #a6c8ef;
+    }
+
+    .drive img {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 6px;
+    }
+
+    .address-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 8px 0;
+      padding: 0 10px;
+    }
+
+    .btn {
+      background: linear-gradient(to bottom, #ffffff, #e5e5e5);
+      border: 1px solid #a9a9a9;
+      border-radius: 4px;
+      padding: 4px 12px;
+      font-size: 13px;
+      box-shadow: inset 0 1px 0 #fff;
+      transition: background 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to bottom, #dbefff, #c4e1ff);
+      border-color: #7aaedb;
+    }
+
+    .btn:active {
+      background: linear-gradient(to bottom, #aaccee, #88bbdd);
+      border-color: #337ab7;
+    }
+
+    input.input {
+      padding: 4px 6px;
+      border: 1px solid #999;
+      border-radius: 4px;
+      background: #fff;
+    }
+
+    .bottom-bar {
+      padding: 6px 12px;
+      font-size: 12px;
+      background: #f1f1f1;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #ccc;
+    }
+
+    .context-menu {
+      display: none;
+      position: absolute;
+      background-color: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      width: 150px;
+      z-index: 10;
+    }
+
+    .context-menu li {
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .context-menu li:hover {
+      background-color: #d6e8ff;
+    }
+
+    .construction-message {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.construction-message strong {
+  color: #0078d7;
+}
+
+.construction-message em {
+  color: #888;
+}
+
+  </style>
+</head>
+<body>
+  <div class="window active">
+    <div class="title-bar">
+      <div class="title-bar-text">This PC</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div class="address-bar">
+        <button class="btn">Organize</button>
+        <button class="btn">System Properties</button>
+        <button class="btn">Uninstall a Program</button>
+        <button class="btn">Map Network Drive</button>
+        <button class="btn">Control Panel</button>
+      </div>
+      <div class="address-bar">
+        <img src="icons/back.png" width="20" alt="Back">
+        <input class="input" type="text" value="Computer" style="flex: 1;">
+        <img src="icons\Filetypes, Devices, Miscellaneous\imageres_94.ico" width="20" alt="Search">
+      </div>
+
+      <div class="window-content">
+        <div class="sidebar">
+          <h4>Favorites</h4>
+          <ul>
+            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_110.ico">Desktop</li>
+            <li><img src="icons\Filetypes, Devices, Miscellaneous\downloads.png">Downloads</li>
+          </ul>
+          <h4>Libraries</h4>
+          <ul>
+            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_90.ico">Documents</li>
+            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_1026.ico">Music</li>
+            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_57.ico">Pictures</li>
+            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_23.ico">Videos</li>
+          </ul>
+          <h4>Disks</h4>
+          <ul>
+            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_36.ico">Local Disk (C:)</li>
+            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_32.ico">Other Stuff (D:)</li>
+            <li><img src="icons\Filetypes, Devices, Miscellaneous\imageres_32.ico">Local Disk 7 (T:)</li>
+          </ul>
+          <h4>Network</h4>
+        </div>
+        <div class="main">
+          <div class="drive-list">
+            <div class="drive">
+              <img src="icons\Filetypes, Devices, Miscellaneous\imageres_36.ico" alt="Drive C">
+              <div>Local Disk (C:)</div>
+            </div>
+            <div class="drive">
+              <img src="icons\Filetypes, Devices, Miscellaneous\imageres_32.ico" alt="Drive D">
+              <div>Other Stuff (D:)</div>
+            </div>
+            <div class="drive">
+              <img src="icons\Filetypes, Devices, Miscellaneous\imageres_32.ico" alt="Drive T">
+              <div>Local Disk 7 (T:)</div>
+            </div>
+            <div class="construction-message">
+              <p><strong>10 IoT site is under construction</strong></p>
+              <p><em>News: UI improved!</em></p>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <span>DESKTOP-C1JAVT3</span>
+        <span>Workgroup: WORKGROUP</span>
+        <span>Memory: 16.0 GB</span>
+        <span>Processor: AMD Ryzen 7 7435HS</span>
+      </div>
+    </div>
+  </div>
+
+  <ul class="context-menu" id="contextMenu">
+    <li>Open</li>
+    <li>Properties</li>
+    <li>Eject</li>
+  </ul>
+
+  <script>
+    const windowEl = document.querySelector('.window');
+    const titleBar = windowEl.querySelector('.title-bar');
+    const windowBody = windowEl.querySelector('.window-body');
+
+    const minimizeBtn = titleBar.querySelector('button[aria-label="Minimize"]');
+    const maximizeBtn = titleBar.querySelector('button[aria-label="Maximize"]');
+    const closeBtn = titleBar.querySelector('button[aria-label="Close"]');
+
+    let isMaximized = false;
+
+    minimizeBtn.addEventListener('click', () => {
+      windowBody.style.display = 'none';
+    });
+
+    maximizeBtn.addEventListener('click', () => {
+      if (!isMaximized) {
+        windowEl.style.position = 'fixed';
+        windowEl.style.top = '0';
+        windowEl.style.left = '0';
+        windowEl.style.width = '100vw';
+        windowEl.style.height = '100vh';
+        windowEl.style.margin = '0';
+        windowEl.style.zIndex = '9999';
+        isMaximized = true;
+      } else {
+        windowEl.removeAttribute('style');
+        windowEl.classList.add('window');
+        isMaximized = false;
+      }
+    });
+
+    closeBtn.addEventListener('click', () => {
+      windowEl.style.display = 'none';
+    });
+
+    titleBar.addEventListener('dblclick', () => {
+      maximizeBtn.click();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && windowBody.style.display === 'none') {
+        windowBody.style.display = '';
+      }
+    });
+
+    document.querySelectorAll('.drive').forEach(drive => {
+      drive.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+        const contextMenu = document.getElementById('contextMenu');
+        contextMenu.style.display = 'block';
+        contextMenu.style.left = `${event.pageX}px`;
+        contextMenu.style.top = `${event.pageY}px`;
+      });
+    });
+
+    document.addEventListener('click', () => {
+      document.getElementById('contextMenu').style.display = 'none';
+    });
+  </script>
+</body>
+</html>
