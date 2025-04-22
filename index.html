@@ -31,35 +31,29 @@
       color: #444;
     }
 
-    .sidebar-list {
+    .sidebar ul {
       list-style: none;
       padding-left: 0;
-      margin: 0;
     }
 
-    .sidebar-list li {
-      margin-bottom: 4px;
-    }
-
-    .sidebar-btn {
+    .sidebar li {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      gap: 8px;
-      width: 100%;
-      padding: 6px 8px;
-      font-size: 13px;
-      text-align: left;
+      padding: 4px;
     }
 
-    .sidebar-btn img {
+    .sidebar li button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 4px;
+      font-size: 13px;
+    }
+
+    .sidebar li img {
       width: 16px;
       height: 16px;
-    }
-
-    .sidebar-btn.is-active {
-      background-color: #cce3ff;
-      box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.15);
+      margin-right: 6px;
     }
 
     .main {
@@ -121,28 +115,6 @@
       border-top: 1px solid #ccc;
     }
 
-    .context-menu {
-      display: none;
-      position: absolute;
-      background-color: white;
-      border: 1px solid #ccc;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 6px;
-      width: 150px;
-      z-index: 10;
-    }
-
-    .context-menu li {
-      padding: 8px 12px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-
-    .context-menu li:hover {
-      background-color: #d6e8ff;
-    }
-
     .construction-message {
       margin-top: 20px;
       padding: 10px;
@@ -190,29 +162,25 @@
       <div class="window-content">
         <div class="sidebar">
           <h4>Favorites</h4>
-          <ul class="sidebar-list">
-            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_110.ico">Desktop</button></li>
-            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/downloads.png">Downloads</button></li>
+          <ul>
+            <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_110.ico">Desktop</button></li>
+            <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/downloads.png">Downloads</button></li>
           </ul>
-
           <h4>Libraries</h4>
-          <ul class="sidebar-list">
-            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_90.ico">Documents</button></li>
-            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_1026.ico">Music</button></li>
-            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_57.ico">Pictures</button></li>
-            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_23.ico">Videos</button></li>
+          <ul>
+            <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_90.ico">Documents</button></li>
+            <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_1026.ico">Music</button></li>
+            <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_57.ico">Pictures</button></li>
+            <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_23.ico">Videos</button></li>
           </ul>
-
           <h4>Disks</h4>
-          <ul class="sidebar-list">
-            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_36.ico">Local Disk (C:)</button></li>
-            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Other Stuff (D:)</button></li>
-            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Local Disk 7 (T:)</button></li>
+          <ul>
+            <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_36.ico">Local Disk (C:)</button></li>
+            <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Other Stuff (D:)</button></li>
+            <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Local Disk 7 (T:)</button></li>
           </ul>
-
           <h4>Network</h4>
         </div>
-
         <div class="main">
           <div class="drive-list">
             <div class="drive">
@@ -245,11 +213,26 @@
     </div>
   </div>
 
-  <ul class="context-menu" id="contextMenu">
-    <li>Open</li>
-    <li>Properties</li>
-    <li>Eject</li>
-  </ul>
+  <!-- Popup Modal -->
+  <div class="window glass active" id="popupModal" style="
+    display: none;
+    width: 300px;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+  ">
+    <div class="title-bar" id="popupTitleBar">
+      <div class="title-bar-text">Hey you !</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" id="closePopup"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <p> This section is under construction </p>
+    </div>
+  </div>
 
   <script>
     const windowEl = document.querySelector('.window');
@@ -258,10 +241,11 @@
     const minimizeBtn = titleBar.querySelector('button[aria-label="Minimize"]');
     const maximizeBtn = titleBar.querySelector('button[aria-label="Maximize"]');
     const closeBtn = titleBar.querySelector('button[aria-label="Close"]');
-
     let isMaximized = false;
 
-    minimizeBtn.addEventListener('click', () => windowBody.style.display = 'none');
+    minimizeBtn.addEventListener('click', () => {
+      windowBody.style.display = 'none';
+    });
 
     maximizeBtn.addEventListener('click', () => {
       if (!isMaximized) {
@@ -280,9 +264,13 @@
       }
     });
 
-    closeBtn.addEventListener('click', () => windowEl.style.display = 'none');
+    closeBtn.addEventListener('click', () => {
+      windowEl.style.display = 'none';
+    });
 
-    titleBar.addEventListener('dblclick', () => maximizeBtn.click());
+    titleBar.addEventListener('dblclick', () => {
+      maximizeBtn.click();
+    });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && windowBody.style.display === 'none') {
@@ -290,52 +278,70 @@
       }
     });
 
-    document.querySelectorAll('.drive').forEach(drive => {
-      drive.addEventListener('contextmenu', (event) => {
-        event.preventDefault();
-        const contextMenu = document.getElementById('contextMenu');
-        contextMenu.style.display = 'block';
-        contextMenu.style.left = `${event.pageX}px`;
-        contextMenu.style.top = `${event.pageY}px`;
-      });
-    });
-
-    document.addEventListener('click', () => {
-      document.getElementById('contextMenu').style.display = 'none';
-    });
+    // Popup modal logic
+    const modal = document.getElementById("popupModal");
+    const closeModal = document.getElementById("closePopup");
 
     document.querySelectorAll('.sidebar-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('is-active'));
-        btn.classList.add('is-active');
+        modal.style.display = 'block';
       });
     });
 
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Drag modal
+    const popupTitleBar = document.getElementById("popupTitleBar");
     let isDragging = false;
     let offsetX, offsetY;
 
-    titleBar.addEventListener('mousedown', (e) => {
+    popupTitleBar.addEventListener('mousedown', (e) => {
       isDragging = true;
-      const rect = windowEl.getBoundingClientRect();
+      const rect = modal.getBoundingClientRect();
       offsetX = e.clientX - rect.left;
       offsetY = e.clientY - rect.top;
-      windowEl.style.position = 'absolute';
-      windowEl.style.margin = '0';
-      windowEl.style.left = `${rect.left}px`;
-      windowEl.style.top = `${rect.top}px`;
-      windowEl.style.zIndex = '9999';
     });
 
     document.addEventListener('mousemove', (e) => {
       if (isDragging) {
-        windowEl.style.left = `${e.clientX - offsetX}px`;
-        windowEl.style.top = `${e.clientY - offsetY}px`;
+        modal.style.left = `${e.clientX - offsetX}px`;
+        modal.style.top = `${e.clientY - offsetY}px`;
       }
     });
 
     document.addEventListener('mouseup', () => {
       isDragging = false;
     });
+  // Make main window draggable
+  const mainTitleBar = document.querySelector(".title-bar");
+  const mainWindow = document.querySelector(".window");
+  let isMainDragging = false;
+  let mainOffsetX, mainOffsetY;
+
+  mainTitleBar.addEventListener("mousedown", (e) => {
+    // Prevent dragging if clicking on a title bar button
+    if (e.target.closest(".title-bar-controls")) return;
+
+    isMainDragging = true;
+    const rect = mainWindow.getBoundingClientRect();
+    mainOffsetX = e.clientX - rect.left;
+    mainOffsetY = e.clientY - rect.top;
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (isMainDragging) {
+      mainWindow.style.position = "fixed";
+      mainWindow.style.left = `${e.clientX - mainOffsetX}px`;
+      mainWindow.style.top = `${e.clientY - mainOffsetY}px`;
+      mainWindow.style.margin = "0";
+    }
+  });
+
+  document.addEventListener("mouseup", () => {
+    isMainDragging = false;
+  });
   </script>
 </body>
 </html>
