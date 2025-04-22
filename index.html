@@ -58,14 +58,16 @@
 
     .main {
       flex: 1;
-      padding: 16px;
+      padding: 0;
       background: white;
+      position: relative;
     }
 
     .drive-list {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
+      padding: 16px;
     }
 
     .drive {
@@ -133,6 +135,13 @@
     .construction-message em {
       color: #888;
     }
+
+    #siteFrame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -165,6 +174,7 @@
           <ul>
             <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_110.ico">Desktop</button></li>
             <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/downloads.png">Downloads</button></li>
+            <li><button class="sidebar-btn"><img src="icons\Filetypes, Devices, Miscellaneous\r8p.ico">Revert8plus(Tech stuff)</button></li>
           </ul>
           <h4>Libraries</h4>
           <ul>
@@ -181,8 +191,8 @@
           </ul>
           <h4>Network</h4>
         </div>
-        <div class="main">
-          <div class="drive-list">
+        <div class="main" id="mainContent">
+          <div class="drive-list" id="driveList">
             <div class="drive">
               <img src="icons/Filetypes, Devices, Miscellaneous/imageres_36.ico" alt="Drive C">
               <div>Local Disk (C:)</div>
@@ -202,6 +212,7 @@
               <p><em>DM me on discord, filedropconfusion</em></p>
             </div>
           </div>
+          <iframe id="siteFrame" src=""></iframe>
         </div>
       </div>
       <div class="bottom-bar">
@@ -213,7 +224,6 @@
     </div>
   </div>
 
-  <!-- Popup Modal -->
   <div class="window glass active" id="popupModal" style="
     display: none;
     width: 300px;
@@ -278,13 +288,24 @@
       }
     });
 
-    // Popup modal logic
     const modal = document.getElementById("popupModal");
     const closeModal = document.getElementById("closePopup");
+    const driveList = document.getElementById("driveList");
+    const siteFrame = document.getElementById("siteFrame");
 
     document.querySelectorAll('.sidebar-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        modal.style.display = 'block';
+        const btnText = btn.innerText.trim();
+
+        if (btnText.includes("Revert8plus")) {
+          driveList.style.display = "none";
+          siteFrame.style.display = "block";
+          siteFrame.src = "https://teknixstuff.com/Libraries/Projects/Revert8Plus/";
+        } else {
+          siteFrame.style.display = "none";
+          driveList.style.display = "flex";
+          modal.style.display = 'block';
+        }
       });
     });
 
@@ -314,34 +335,33 @@
     document.addEventListener('mouseup', () => {
       isDragging = false;
     });
-  // Make main window draggable
-  const mainTitleBar = document.querySelector(".title-bar");
-  const mainWindow = document.querySelector(".window");
-  let isMainDragging = false;
-  let mainOffsetX, mainOffsetY;
 
-  mainTitleBar.addEventListener("mousedown", (e) => {
-    // Prevent dragging if clicking on a title bar button
-    if (e.target.closest(".title-bar-controls")) return;
+    // Drag main window
+    const mainTitleBar = document.querySelector(".title-bar");
+    const mainWindow = document.querySelector(".window");
+    let isMainDragging = false;
+    let mainOffsetX, mainOffsetY;
 
-    isMainDragging = true;
-    const rect = mainWindow.getBoundingClientRect();
-    mainOffsetX = e.clientX - rect.left;
-    mainOffsetY = e.clientY - rect.top;
-  });
+    mainTitleBar.addEventListener("mousedown", (e) => {
+      if (e.target.closest(".title-bar-controls")) return;
+      isMainDragging = true;
+      const rect = mainWindow.getBoundingClientRect();
+      mainOffsetX = e.clientX - rect.left;
+      mainOffsetY = e.clientY - rect.top;
+    });
 
-  document.addEventListener("mousemove", (e) => {
-    if (isMainDragging) {
-      mainWindow.style.position = "fixed";
-      mainWindow.style.left = `${e.clientX - mainOffsetX}px`;
-      mainWindow.style.top = `${e.clientY - mainOffsetY}px`;
-      mainWindow.style.margin = "0";
-    }
-  });
+    document.addEventListener("mousemove", (e) => {
+      if (isMainDragging) {
+        mainWindow.style.position = "fixed";
+        mainWindow.style.left = `${e.clientX - mainOffsetX}px`;
+        mainWindow.style.top = `${e.clientY - mainOffsetY}px`;
+        mainWindow.style.margin = "0";
+      }
+    });
 
-  document.addEventListener("mouseup", () => {
-    isMainDragging = false;
-  });
+    document.addEventListener("mouseup", () => {
+      isMainDragging = false;
+    });
   </script>
 </body>
 </html>
