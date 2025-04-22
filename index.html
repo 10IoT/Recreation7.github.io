@@ -180,14 +180,14 @@
           <ul>
             <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_90.ico">Documents</button></li>
             <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_1026.ico">Music</button></li>
-            <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_57.ico">Pictures</button></li>
+            <li><button class="sidebar-btn"><img src="icons\Filetypes, Devices, Miscellaneous\imageres_72.ico">Pictures</button></li>
             <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_23.ico">Videos</button></li>
           </ul>
           <h4>Disks</h4>
           <ul>
             <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_36.ico">Local Disk (C:)</button></li>
             <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Other Stuff (D:)</button></li>
-            <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Local Disk 7 (T:)</button></li>
+            <li><button class="sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Some random disk (T:)</button></li>
           </ul>
           <h4>Network</h4>
         </div>
@@ -196,14 +196,23 @@
             <div class="drive">
               <img src="icons/Filetypes, Devices, Miscellaneous/imageres_36.ico" alt="Drive C">
               <div>Local Disk (C:)</div>
+              <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">
+                <div style="width: 47%"></div>
+              </div>
             </div>
             <div class="drive">
               <img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico" alt="Drive D">
               <div>Other Stuff (D:)</div>
+              <div role="progressbar" class="paused">
+                <div style="width: 70%"></div>
+              </div>
             </div>
             <div class="drive">
               <img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico" alt="Drive T">
               <div>Local Disk 7 (T:)</div>
+              <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">
+                <div style="width: 0%"></div>
+              </div>
             </div>
             <div class="construction-message">
               <p><strong>10 IoT site is under construction</strong></p>
