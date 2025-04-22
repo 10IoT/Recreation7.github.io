@@ -31,29 +31,35 @@
       color: #444;
     }
 
-    .sidebar ul {
+    .sidebar-list {
       list-style: none;
       padding-left: 0;
+      margin: 0;
     }
 
-    .sidebar li {
+    .sidebar-list li {
+      margin-bottom: 4px;
+    }
+
+    .sidebar-btn {
       display: flex;
       align-items: center;
-      padding: 6px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-      border-radius: 4px;
+      justify-content: flex-start;
+      gap: 8px;
+      width: 100%;
+      padding: 6px 8px;
+      font-size: 13px;
+      text-align: left;
     }
 
-    .sidebar li img {
+    .sidebar-btn img {
       width: 16px;
       height: 16px;
-      margin-right: 6px;
     }
 
-    .sidebar li:hover {
-      background-color: #d6e8ff;
+    .sidebar-btn.is-active {
+      background-color: #cce3ff;
+      box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.15);
     }
 
     .main {
@@ -184,25 +190,29 @@
       <div class="window-content">
         <div class="sidebar">
           <h4>Favorites</h4>
-          <ul>
-            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_110.ico">Desktop</li>
-            <li><img src="icons/Filetypes, Devices, Miscellaneous/downloads.png">Downloads</li>
+          <ul class="sidebar-list">
+            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_110.ico">Desktop</button></li>
+            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/downloads.png">Downloads</button></li>
           </ul>
+
           <h4>Libraries</h4>
-          <ul>
-            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_90.ico">Documents</li>
-            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_1026.ico">Music</li>
-            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_57.ico">Pictures</li>
-            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_23.ico">Videos</li>
+          <ul class="sidebar-list">
+            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_90.ico">Documents</button></li>
+            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_1026.ico">Music</button></li>
+            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_57.ico">Pictures</button></li>
+            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_23.ico">Videos</button></li>
           </ul>
+
           <h4>Disks</h4>
-          <ul>
-            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_36.ico">Local Disk (C:)</li>
-            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Other Stuff (D:)</li>
-            <li><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Local Disk 7 (T:)</li>
+          <ul class="sidebar-list">
+            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_36.ico">Local Disk (C:)</button></li>
+            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Other Stuff (D:)</button></li>
+            <li><button class="button sidebar-btn"><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Local Disk 7 (T:)</button></li>
           </ul>
+
           <h4>Network</h4>
         </div>
+
         <div class="main">
           <div class="drive-list">
             <div class="drive">
@@ -245,16 +255,13 @@
     const windowEl = document.querySelector('.window');
     const titleBar = windowEl.querySelector('.title-bar');
     const windowBody = windowEl.querySelector('.window-body');
-
     const minimizeBtn = titleBar.querySelector('button[aria-label="Minimize"]');
     const maximizeBtn = titleBar.querySelector('button[aria-label="Maximize"]');
     const closeBtn = titleBar.querySelector('button[aria-label="Close"]');
 
     let isMaximized = false;
 
-    minimizeBtn.addEventListener('click', () => {
-      windowBody.style.display = 'none';
-    });
+    minimizeBtn.addEventListener('click', () => windowBody.style.display = 'none');
 
     maximizeBtn.addEventListener('click', () => {
       if (!isMaximized) {
@@ -273,13 +280,9 @@
       }
     });
 
-    closeBtn.addEventListener('click', () => {
-      windowEl.style.display = 'none';
-    });
+    closeBtn.addEventListener('click', () => windowEl.style.display = 'none');
 
-    titleBar.addEventListener('dblclick', () => {
-      maximizeBtn.click();
-    });
+    titleBar.addEventListener('dblclick', () => maximizeBtn.click());
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && windowBody.style.display === 'none') {
@@ -300,35 +303,39 @@
     document.addEventListener('click', () => {
       document.getElementById('contextMenu').style.display = 'none';
     });
-  </script>
-  <script>
+
+    document.querySelectorAll('.sidebar-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+      });
+    });
+
     let isDragging = false;
     let offsetX, offsetY;
-  
+
     titleBar.addEventListener('mousedown', (e) => {
       isDragging = true;
       const rect = windowEl.getBoundingClientRect();
       offsetX = e.clientX - rect.left;
       offsetY = e.clientY - rect.top;
-  
-      // Ensure window is absolutely positioned for dragging
       windowEl.style.position = 'absolute';
       windowEl.style.margin = '0';
       windowEl.style.left = `${rect.left}px`;
       windowEl.style.top = `${rect.top}px`;
       windowEl.style.zIndex = '9999';
     });
-  
+
     document.addEventListener('mousemove', (e) => {
       if (isDragging) {
         windowEl.style.left = `${e.clientX - offsetX}px`;
         windowEl.style.top = `${e.clientY - offsetY}px`;
       }
     });
-  
+
     document.addEventListener('mouseup', () => {
       isDragging = false;
     });
-  </script>  
+  </script>
 </body>
 </html>
