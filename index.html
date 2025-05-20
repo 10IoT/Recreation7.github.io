@@ -2,109 +2,477 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Recreation7</title>
-   <link rel="icon" href="icons\Filetypes, Devices, Miscellaneous\imageres_110.ico" />
+  <link rel="icon" href="icons/Filetypes, Devices, Miscellaneous/imageres_110.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/7.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <style>
     body {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #fff;
-      color: #111;
+      background: url('https://ia904603.us.archive.org/10/items/Windows-wallcollection/Img7_%28Windows_7%29.jpg') center/cover no-repeat fixed;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      overflow: hidden;
     }
 
-    .top-bar {
-      background-color: #00AB7F; /* Green line color */
-      height: 10px;
+    .window {
+      width: 1000px;
+      height: 550px; 
+      max-width: none; 
+      margin: auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .window-content {
+      display: flex;
+      height: calc(100% - 58px);
+      background: #fff;
+    }
+
+    .sidebar {
+      width: 230px;
+      background: #f3f3f3;
+      border-right: 1px solid #ccc;
+      overflow-y: auto;
+      padding: 9px;
+    }
+
+    .sidebar h4 {
+      margin: 10px 5px;
+      font-size: 12px;
+      color: #444;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 2px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar li {
+      margin: 2px 0;
+    }
+
+    .sidebar button {
       width: 100%;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-      line-height: 1.6;
-    }
-
-    h1 {
-      font-size: 26px;
-      font-weight: 600;
-    }
-
-    h2 {
-      font-size: 18px;
-      margin-top: 2em;
-    }
-
-    b, strong {
-      font-weight: 600;
-    }
-
-    a {
-      color: #1da1f2;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    ul {
-      margin-top: 1em;
-      padding-left: 1.5em;
-    }
-
-    li {
-      margin-bottom: 1em;
-    }
-
-    footer {
-      text-align: center;
+      display: flex;
+      align-items: center;
+      padding: 5px 8px;
       font-size: 13px;
-      color: #777;
-      margin-top: 60px;
-      padding: 20px 0;
-      border-top: 1px solid #eee;
+      background: none;
+      border: none;
+      text-align: left;
+      border-radius: 4px;
+      cursor: pointer;
     }
 
-    footer img {
-      display: block;
-      margin: 35px auto 20px;
-      height: 32px;
-      opacity: 0.5;
+    .sidebar button:hover {
+      background: linear-gradient(#e9f3ff, #d1e7ff);
+      border: 1px solid #a2c3e8;
     }
+
+    .sidebar img {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+    }
+
+    .main {
+      flex-grow: 1;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menubar {
+      background: #e4e4e4;
+      border-bottom: 1px solid #ccc;
+      padding: 4px 8px;
+    }
+
+    .menubar ul {
+      display: flex;
+      gap: 12px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .menubar li {
+      position: relative;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .menubar li:hover {
+      background: #d0e0ff;
+    }
+
+    .menubar li ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border: 1px solid #aaa;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      padding: 4px 0;
+      z-index: 100;
+      min-width: 150px;
+    }
+
+    .menubar li:hover ul {
+      display: block;
+    }
+
+    .menubar li ul li {
+      padding: 5px 12px;
+      white-space: nowrap;
+    }
+
+    .menubar li ul li:hover {
+      background: #d6e9ff;
+    }
+
+    .address-bar {
+      padding: 6px 10px;
+      background: #e6e6e6;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .address-bar input {
+      flex: 1;
+      padding: 4px 6px;
+      border: 1px solid #999;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .drive-list {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 16px;
+      gap: 24px;
+    }
+
+    .drive {
+      width: 140px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .drive:hover {
+      background: #dceaff;
+    }
+
+    .drive img {
+      width: 48px;
+      height: 48px;
+    }
+
+    .construction-message {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f8f8f8;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .construction-message strong {
+      color: #0078d7;
+    }
+
+    .construction-message em {
+      color: #888;
+    }
+
+    .bottom-bar {
+      background: #e1e1e1;
+      padding: 6px 5px;
+      font-size: 12px;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      display: none;
+      border: none;
+    }
+
+    .taskbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.3);
+      border-top: 1px solid #ccc;
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      box-shadow: 0 -1px 3px rgba(0,0,0,0.3);
+      z-index: 5;
+    }
+
+    .taskbar::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.4);
+    }
+
+    /* New styles for window overlapping effect */
+    .window-overlap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(6px);
+      transition: height 0.2s ease;
+      pointer-events: none;
+      z-index: 20;
+    }
+
   </style>
 </head>
 <body>
-  <div class="top-bar"></div>
 
-  <div class="container">
-    <h1>Uh oh!</h1>
-    <p>
-      Recreation7 is under maintenance/down. You can wait on this page for some time.
-    </p>
+  <div class="window glass active" style="--window-background-color: #805ba5;">
+    <div class="window-overlap" id="windowOverlap"></div>
+    <div class="title-bar">
+      <div class="title-bar-text">This PC</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
 
-     <p>
-       <strong>Update:</strong>This may take a long time since the HTML file I have is totally different from the one in the past one and will take time to reconstruct.
-    </p>
+    <ul role="menubar" class="can-hover">
+    <li role="menuitem" tabindex="0" aria-haspopup="true">
+      File
+      <ul role="menu">
+        <li role="menuitem">
+          <a href="#menubar">
+            Open <span>Ctrl+O</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#menubar">
+            Save <span>Ctrl+S</span>
+          </a>
+        </li>
+        <li role="menuitem" class="has-divider">
+          <a href="#menubar">
+            Save As... <span>Ctrl+Shift+S</span>
+          </a>
+        </li>
+        <li role="menuitem"><a href="#menubar">Exit</a></li>
+      </ul>
+    </li>
+    <li role="menuitem" tabindex="0" aria-haspopup="true">
+      Edit
+      <ul role="menu">
+        <li role="menuitem"><a href="#menubar">Undo</a></li>
+        <li role="menuitem"><a href="#menubar">Copy</a></li>
+        <li role="menuitem"><a href="#menubar">Cut</a></li>
+        <li role="menuitem" class="has-divider"><a href="#menubar">Paste</a></li>
+        <li role="menuitem"><a href="#menubar">Delete</a></li>
+        <li role="menuitem"><a href="#menubar">Find...</a></li>
+        <li role="menuitem"><a href="#menubar">Replace...</a></li>
+        <li role="menuitem"><a href="#menubar">Go to...</a></li>
+      </ul>
+    </li>
+    <li role="menuitem" tabindex="0" aria-haspopup="true">
+      View
+      <ul role="menu">
+        <li role="menuitem" tabindex="0" aria-haspopup="true">
+          Zoom
+          <ul role="menu">
+            <li role="menuitem"><button>Zoom In</button></li>
+            <li role="menuitem"><button>Zoom Out</button></li>
+          </ul>
+        </li>
+        <li role="menuitem"><a href="#menubar">Status Bar</a></li>
+      </ul>
+    </li>
+    <li role="menuitem" tabindex="0" aria-haspopup="true">
+      Help
+      <ul role="menu">
+        <li role="menuitem"><a href="#menubar">View Help</a></li>
+        <li role="menuitem"><a href="#menubar">About</a></li>
+      </ul>
+    </li>
+    </ul>  
 
-    <h2>What was this site?</h2>
-    <ul>
-      <li><strong>Recreation7</strong> is a site where the main goal is to recreate the Windows 7 UI as much as possible.</li>
-      <li><strong>Is it that good?</strong> It is still under construction — only the file explorer works (partially).</li>
-      <li><strong>How long should this take?</strong> The downtime or maintenance may last 1–24 hours.</li>
-    </ul>
+    <div class="window-content">
+      <div class="sidebar">
+      <h4>Favorites</h4>
+      <ul>
+        <li><button><img src="icons/Filetypes, Devices, Miscellaneous/imageres_110.ico">Desktop</button></li>
+        <li><button><img src="icons/Filetypes, Devices, Miscellaneous/downloads.png">Downloads</button></li>
+        <li><button><img src="icons/Filetypes, Devices, Miscellaneous/r8p.ico">Revert8plus (Tech Stuff)</button></li>
+      </ul>
 
-    <h2>Is there anyone helping you?</h2>
-    <p>
-      Sadly, no one wants to support this project — only myself and a few people. If you want to support, friend me on Discord: <strong>recreation7</strong>
-    </p>
+      <h4>Libraries</h4>
+      <ul>
+        <li><button><img src="icons/Filetypes, Devices, Miscellaneous/imageres_90.ico">Documents</button></li>
+        <li><button><img src="icons/Filetypes, Devices, Miscellaneous/imageres_1026.ico">Music</button></li>
+        <li><button><img src="icons/Filetypes, Devices, Miscellaneous/imageres_72.ico">Pictures</button></li>
+        <li><button><img src="icons/Filetypes, Devices, Miscellaneous/imageres_23.ico">Videos</button></li>
+      </ul>
+
+      <h4>Disks</h4>
+      <ul>
+        <li><button><img src="icons/Filetypes, Devices, Miscellaneous/imageres_36.ico">Local Disk (C:)</button></li>
+        <li><button><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Other Stuff (D:)</button></li>
+        <li><button><img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico">Random Disk (T:)</button></li>
+      </ul>
+
+      <h4>Network</h4>
+      </div>
+
+      <div class="main" id="mainContent">
+        <div class="drive-list" id="driveList">
+          <div class="drive">
+            <img src="icons/Filetypes, Devices, Miscellaneous/imageres_36.ico" alt="Drive C">
+            <div>Local Disk (C:)</div>
+            <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">
+              <div style="width: 47%"></div>
+            </div>
+          </div>
+          <div class="drive">
+            <img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico" alt="Drive D">
+            <div>Other Stuff (D:)</div>
+            <div role="progressbar" class="paused">
+              <div style="width: 70%"></div>
+            </div>
+          </div>
+          <div class="drive">
+            <img src="icons/Filetypes, Devices, Miscellaneous/imageres_32.ico" alt="Drive T">
+            <div>Local Disk 7 (T:)</div>
+            <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">
+              <div style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+        <iframe id="siteFrame" src=""></iframe>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <span>DESKTOP-C1JAVT3</span>
+      <span>Workgroup: WORKGROUP</span>
+      <span>Memory: 16.0 GB</span>
+      <span>Processor: AMD Ryzen 7 7435HS</span>
+    </div>
   </div>
 
-  <footer>
-    <img src="icons\Filetypes, Devices, Miscellaneous\imageres_110.ico" alt="Site Logo" />
-    &copy; 2025 Recreation7.
-  </footer>
+  <!-- Aero-style Taskbar -->
+  <div class="taskbar glass"></div>
+
+  <!-- Popup modal -->
+  <div class="window glass active" id="popupModal" style="
+    display: none;
+    width: 300px;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;">
+    <div class="title-bar" id="popupTitleBar">
+      <div class="title-bar-text">Hey you !</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" id="closePopup"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <p>This section is under construction</p>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $(".sidebar button").click(function () {
+        const text = $(this).text().trim();
+        if (text.includes("Revert8plus")) {
+          $("#driveList").hide();
+          $("#siteFrame").attr("src", "https://teknixstuff.com/Libraries/Projects/Revert8Plus/").show();
+        } else {
+          $("#siteFrame").hide();
+          $("#driveList").show();
+        }
+      });
+
+      let isDragging = false, offsetX, offsetY;
+      $(".title-bar").mousedown(function (e) {
+        if ($(e.target).closest(".title-bar-controls").length) return;
+        isDragging = true;
+        offsetX = e.clientX - $(".window").offset().left;
+        offsetY = e.clientY - $(".window").offset().top;
+      });
+
+      $(document).mousemove(function (e) {
+        if (isDragging) {
+          const windowElement = $(".window");
+          const newTop = e.clientY - offsetY;
+          const newLeft = e.clientX - offsetX;
+          
+          windowElement.css({
+            top: newTop,
+            left: newLeft,
+            position: "fixed",
+            margin: 0
+          });
+
+          // Calculate overlap with taskbar
+          const windowBottom = newTop + windowElement.outerHeight();
+          const taskbarTop = $(window).height() - $(".taskbar").outerHeight();
+          const overlap = windowBottom - taskbarTop;
+          
+          if (overlap > 0) {
+            // Window is overlapping with taskbar
+            $("#windowOverlap").css({
+              height: overlap + "px",
+              opacity: 1
+            });
+          } else {
+            // Window is not overlapping with taskbar
+            $("#windowOverlap").css({
+              height: "0px",
+              opacity: 0
+            });
+          }
+        }
+      }).mouseup(function () {
+        isDragging = false;
+      });
+    });
+  </script>
+
 </body>
 </html>
